@@ -6,30 +6,31 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class StudentAdapter (val students: MutableList<Student>) : RecyclerView.Adapter<>(){
+class StudentAdapter (private val students: MutableList<Student>)
+    : RecyclerView.Adapter<StudentAdapter.ViewHolder>(){
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
+    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
         val tvStudentName : TextView? = view.findViewById<TextView>(
             R.id.tvStudentName)
         val tvStudentRegNo : TextView? = view.findViewById<TextView>(
             R.id.tvStudentRegNo)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ??? {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.student_record, parent ,attachToRoot false
-        )
+            R.layout.student_record, parent, false)
+
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
         val student = students[position]
         holder.tvStudentRegNo?.text =student.adminNo
-        holder.tvStudentName.text =student.name
+        holder.tvStudentName?.text =student.name
     }
-    overide fun getItemCount (): Int {
+
+    override fun getItemCount(): Int {
         return students.size
     }
 }
